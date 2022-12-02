@@ -1,16 +1,5 @@
 'use strict'
 
-// get todos from local storage
-const getSavedTodos = () => {
-    const todosJSON = localStorage.getItem('todos');
-    
-    try{
-        return todosJSON ? JSON.parse(todosJSON) : [];
-    } catch (e){
-        return [];
-    } 
-}
-
 // Save todos to localStorage
 const saveTodos = (todos) => {
     localStorage.setItem('todos', JSON.stringify(todos))
@@ -23,6 +12,18 @@ const removeTodo = (id) => {
         todos.splice(index, 1);
     }
     return todos;
+}
+
+
+// get todos from local storage
+const getSavedTodos = () => {
+    const todosJSON = localStorage.getItem('todos');
+    
+    try{
+        return todosJSON ? JSON.parse(todosJSON) : [];
+    } catch (e){
+        return [];
+    } 
 }
 
 // Render applicatin todos
