@@ -13,6 +13,12 @@ document.querySelector('#filter-todo').addEventListener('input', (e) => {
     renderTodos(todos, filters);
 })
 
+
+document.querySelector('#hide-completed').addEventListener('change', (e) =>{
+    filters.hideCompleted = e.target.checked;
+    renderTodos(todos, filters);
+})
+
 document.querySelector('#todo-form').addEventListener('submit', (e) =>{
     e.preventDefault();
     const todoValue = e.target.elements.addTodo.value.trim();
@@ -27,7 +33,7 @@ document.querySelector('#todo-form').addEventListener('submit', (e) =>{
     }
 })
 
-document.querySelector('#hide-completed').addEventListener('change', (e) =>{
-    filters.hideCompleted = e.target.checked;
+document.querySelector('#filter-todo').addEventListener('input', (e) => {
+    filters.searchText = e.target.value;
     renderTodos(todos, filters);
 })
