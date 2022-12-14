@@ -94,3 +94,46 @@ const renderTodos = (todos, filters) => {
     getSummaryDOM(todos);
     generateTodoDOM(filteredTodos);
 }
+
+const computeDisplay = (todos) => {
+    todos.forEach( (todo) => {
+
+        const todoElement = document.createElement('label');
+        const containerEl = document.createElement('div')
+        const checkbox = document.createElement('input');
+        const removeButton = document.createElement('button');
+        const todoText = document.createElement('span');
+
+        // Setup container
+        containerEl.classList.add('list-item__container')
+        todoElement.classList.add('list-item')
+        todoElement.appendChild(containerEl)
+
+
+        //create checkbox
+        checkbox.setAttribute('type', 'checkbox');
+        checkbox.checked = todo.completed;
+        containerEl.appendChild(checkbox);
+        checkbox.addEventListener('change', (e) => {
+            todo.completed = e.target.checked;
+            saveTodos(todos);
+            renderTodos(todos, filters);
+        })
+
+        // Create text element for the Todo
+        todoText.textContent = todo.text;
+        containerEl.appendChild(todoText);
+
+        // Create remove button
+        removeButton.textContent = 'remove';
+        removeButton.classList.add('button', 'button--text')
+        todoElement.appendChild(removeButton);
+        removeButton.addEventListener('click', () =>{
+            todos = removeTodo(todo.id);
+            saveTodos(todos);
+            renderTodos(todos, filters);
+        })
+        
+        document.querySelector('#todos').appendChild(todoElement);
+    })
+}
